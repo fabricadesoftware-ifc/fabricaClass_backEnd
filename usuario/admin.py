@@ -1,16 +1,13 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.utils.translation import gettext_lazy as _
-
 from .forms import CustomUserChangeForm, CustomUserCreationForm
-from .models import Usuario
-
-
+from .models import Usuario, Professor, Aluno
 @admin.register(Usuario)
 class CustomUserAdmin(UserAdmin):
     add_form = CustomUserCreationForm
     form = CustomUserChangeForm
-    model = Usuario
+    model = Usuario, Professor, Aluno
     list_display = (
         "email",
         "is_staff",
@@ -61,4 +58,5 @@ class CustomUserAdmin(UserAdmin):
     )
     search_fields = ("email",)
     ordering = ("email",)
+    filter_horizontal = ('groups', 'user_permissions')
     readonly_fields = ["date_joined", "last_login"]
