@@ -29,10 +29,10 @@ class CustomUserAdmin(UserAdmin):
                 )
             },
         ),
-        (
-            _("Personal info"),
-            {"fields": ("cpf", "telefone", "data_nascimento")},
-        ),
+        # (
+        #     _("Personal info"),
+        #     # {"fields": ("cpf", "telefone", "data_nascimento")},
+        # ),
         (
             _("Permissions"),
             {"fields": ("is_staff", "is_active", "groups", "user_permissions")},

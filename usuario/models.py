@@ -5,6 +5,8 @@ from FabricaClass.models import Curso, Turma
 from django.contrib.auth.models import Group, Permission
 
 from .managers import CustomUserManager
+
+
 class Usuario(AbstractUser):
     #username = None
     email = models.EmailField(_("e-mail address"), unique=True)
@@ -31,7 +33,7 @@ class Usuario(AbstractUser):
 
 class Professor(models.Model): 
     usuario = models.ForeignKey(Usuario, on_delete=models.PROTECT, related_name='professor')
-    simpe = models.CharField(_("SIMPE"), max_length=11, blank=True, null=True)
+    siape = models.CharField(_("SIMPE"), max_length=11, blank=True, null=True)
     groups = models.ManyToManyField(Group, related_name='professor_groups')
     user_permissions = models.ManyToManyField(Permission, related_name='professor_user_permissions')
 
