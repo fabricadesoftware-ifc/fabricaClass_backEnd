@@ -33,21 +33,20 @@ class Usuario(AbstractUser):
 
 class Professor(models.Model): 
     usuario = models.ForeignKey(Usuario, on_delete=models.PROTECT, related_name='professor')
-    siape = models.CharField(_("SIMPE"), max_length=11, blank=True, null=True)
+    siape = models.CharField(_("SIAPE"), max_length=11, blank=True, null=True)
     groups = models.ManyToManyField(Group, related_name='professor_groups')
     user_permissions = models.ManyToManyField(Permission, related_name='professor_user_permissions')
 
 
 class Aluno(models.Model):
+    class  ano_letivo(models.IntegerChoices):
+        PRIMEIRO = (1, 'Primeiro',)
+        SEGUNDO = (2, 'Segundo',)
+        TERCEIRO = (3, 'Terceiro',)
     usuario = models.ForeignKey(Usuario, on_delete=models.PROTECT, related_name='aluno')
     matricula = models.CharField(_("Matricula"), max_length=11, blank=True, null=True)
-    cpf = models.CharField(_("CPF"), max_length=11, blank=True, null=True)
+    # cpf = models.CharField(_("CPF"), max_length=11, blank=True, null=True)
     id_turma = models.ForeignKey(Turma, on_delete=models.PROTECT, related_name='turma', blank=True, null=True)
     groups = models.ManyToManyField(Group, related_name='aluno_groups')
-    user_permissions = models.ManyToManyField(Permission, related_name='aluno_user_permissions')
-    class  ano_letivo(models.IntegerChoices):
-        PRIMEIRO = 1, _('Primeiro')
-        SEGUNDO = 2, _('Segundo')
-        TERCEIRO = 3, _('Terceiro')
-        
-                                 
+    user_permissions = models.ManyToManyField(Permission, related_name='aluno_user_permissions')        
+    ano_letivo = models.IntegerField(choices=ano_letivo.choices,  default=ano_letivo.PRIMEIRO)
