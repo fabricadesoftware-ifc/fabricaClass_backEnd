@@ -9,13 +9,16 @@ from .managers import CustomUserManager
 
 class Usuario(AbstractUser):
     #username = None
+    class TipoUsuario(models.IntegerChoices):
+        PROFESSOR = (1, 'Professor',)
+        ALUNO = (2, 'Aluno',)
     email = models.EmailField(_("e-mail address"), unique=True)
     username = models.CharField(_("Nome"), max_length=255, blank=True, null=True)
     #cpf = models.CharField(_("CPF"), max_length=11, blank=True, null=True)
-    #telefone = models.CharField(_("Phone"), max_length=11, blank=True, null=True)
-    #data_nascimento = models.DateField(
-    #    _("Birth Date"), auto_now=False, auto_now_add=False, blank=True, null=True
-    #)
+    telefone = models.CharField(_("Phone"), max_length=11, blank=True, null=True)
+    matricula = models.CharField(_("Matricula/SIAPE"), max_length=11, blank=True, null=True)
+    tipo_usuario = models.IntegerField(choices=TipoUsuario.choices,  default=TipoUsuario.ALUNO)
+    turma = models.ForeignKey(Turma, on_delete=models.PROTECT, related_name='turma', blank=True, null=True)
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []
@@ -31,22 +34,3 @@ class Usuario(AbstractUser):
         verbose_name_plural = "Usuários"
         ordering = ["-date_joined"]
 
-class Professor(models.Model): 
-    usuario = models.ForeignKey(Usuario, on_delete=models.PROTECT, related_name='professor')
-    siape = models.CharField(_("SIAPE"), max_length=11, blank=True, null=True)
-    groups = models.ManyToManyField(Group, related_name='professor_groups')
-    user_permissions = models.ManyToManyField(Permission, related_name='professor_user_permissions')
-
-
-class Aluno(models.Model):
-    class  ano_letivo(models.IntegerChoices):
-        PRIMEIRO = (1, 'Primeiro',)
-        SEGUNDO = (2, 'Segundo',)
-        TERCEIRO = (3, 'Terceiro',)
-    usuario = models.ForeignKey(Usuario, on_delete=models.PROTECT, related_name='aluno')
-    matricula = models.CharField(_("Matricula"), max_length=11, blank=True, null=True)
-    # cpf = models.CharField(_("CPF"), max_length=11, blank=True, null=True)
-    id_turma = models.ForeignKey(Turma, on_delete=models.PROTECT, related_name='turma', blank=True, null=True)
-    groups = models.ManyToManyField(Group, related_name='aluno_groups')
-    user_permissions = models.ManyToManyField(Permission, related_name='aluno_user_permissions')        
-    ano_letivo = models.IntegerField(choices=ano_letivo.choices,  default=ano_letivo.PRIMEIRO)
