@@ -1,6 +1,6 @@
 from collections.abc import Iterable
 from django.db import models
-from django.core.exceptions import ValidationError
+# from django.core.exceptions import ValueError
 
 class Curso(models.Model):
     class TurnoCurso(models.IntegerChoices):
@@ -39,7 +39,10 @@ class Turma(models.Model):
     def __str__(self):
         return self.legenda
 
-    #def save(self, force_insert: bool = ..., force_update: bool = ..., using: str | None = ..., update_fields: Iterable[str] | None = ...) -> None:
-        if (self.ano_letivo == "" and self.semestre_letivo == ""):
-            raise ValidationError("O ano ou o semestre letivo devem ser preenchidos")
-        return super().save(force_insert, force_update, using, update_fields)
+    def save(self, *args, **kwargs):
+        # breakpoint()
+        if (self.ano_letivo is None and self.semestre_letivo is None):
+            raise ValueError("O ano ou o semestre letivo devem ser preenchidos")
+        super(Turma, self).save(*args, **kwargs)
+        
+        # return super().save(force_insert, force_update, using, update_fields)
