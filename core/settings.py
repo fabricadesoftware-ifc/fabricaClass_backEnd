@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     "rest_framework",
     "usuario",
     "FabricaClass",
+    'EnvioEmails',
     
 ]
 
@@ -118,8 +119,8 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 AUTH_USER_MODEL = "usuario.Usuario"
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'Suporte.FabricaClass@gmail.com'
-EMAIL_PORT = 587
+EMAIL_HOST = 'smtp.live.com'
+EMAIL_PORT = 25
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'Suporte.FabricaClass@gmail.com'
-EMAIL_HOST_PASSWORD = 'FabricaClass2023Fabrica'
+EMAIL_HOST_USER = 'lucasantonete@hotmail.com'
+EMAIL_HOST_PASSWORD = ''
