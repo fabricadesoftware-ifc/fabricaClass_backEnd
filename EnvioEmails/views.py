@@ -1,18 +1,31 @@
 from django.shortcuts import render
+
+# Create your views here.
 from rest_framework.views import APIView
-from rest_framework.response import Response
 from rest_framework import status
-from django.core.mail import send_mail
+from django.core.mail import BadHeaderError, send_mail
+from django.core.exceptions import ValidationError
+from django.http import HttpResponse
+
 
 class EmailAPIView(APIView):
     def post(self, request, *args, **kwargs):
-        subject = request.data.get('subject', '')
-        message = request.data.get('message', '')
-        recipient_list = request.data.get('recipient_list', '')
+        subject = request.POST.get("subject", "teste")
+        print(subject)
+        message = request.POST.get("message", "testando")
+        recipient_list = ["lucasantonete@hotmail.com", "suporte.fabricaclass@gmail.com"]
 
         try:
-            send_mail(subject, message, 'suporte.fabricaclass@gmail.com', recipient_list, fail_silently=False)
-            return Response({'message': 'Email enviado com sucesso'}, status=status.HTTP_200_OK)
-        except Exception as e:
-            return Response({'message': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-    
+            send_mail(
+                subject,
+                message,
+                recipient_list=recipient_list,
+                from_email="suporte.fabricaclass@gmail.com",
+                 )
+        except BadHeaderError:
+            return HttpResponse("Invalid header found.")
+        except ValidationError as e:
+            return HttpResponse(str(e))
+        return HttpResponse(
+            {"message": "Email enviado com sucesso"}, status=status.HTTP_200_OK
+        )
