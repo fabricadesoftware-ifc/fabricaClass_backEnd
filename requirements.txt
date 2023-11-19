@@ -2,9 +2,14 @@
 # Please do not edit it manually.
 
 asgiref==3.7.2
+certifi==2023.7.22
+charset-normalizer==3.3.2
 django==4.2.5
 djangorestframework==3.14.0
+idna==3.4
 pytz==2023.3.post1
+requests==2.31.0
 setuptools==68.2.2
 sqlparse==0.4.4
 tzdata==2023.3
+urllib3==2.0.7
