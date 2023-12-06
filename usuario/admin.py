@@ -48,6 +48,7 @@ class CustomUserAdmin(UserAdmin):
                     "email",
                     "password1",
                     "password2",
+                    "tipo_usuario",
                     "is_staff",
                     "is_active",
                     "groups",
@@ -56,7 +57,7 @@ class CustomUserAdmin(UserAdmin):
             },
         ),
     )
-    search_fields = ("email",)
+    search_fields = ("email", "tipo_usuario")
     ordering = ("email",)
     filter_horizontal = ('groups', 'user_permissions')
     readonly_fields = ["date_joined", "last_login"]
