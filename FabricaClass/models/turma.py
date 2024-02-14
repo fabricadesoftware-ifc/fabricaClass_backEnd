@@ -1,5 +1,5 @@
 from django.db import models
-from .curso import Curso
+from FabricaClass.models import Curso
 
 class Turma(models.Model):
     class ano_letivo(models.IntegerChoices):
