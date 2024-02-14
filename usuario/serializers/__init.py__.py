@@ -1,0 +1,2 @@
+from aluno import AlunoSerializer
+from professor import ProfessorSerializer
