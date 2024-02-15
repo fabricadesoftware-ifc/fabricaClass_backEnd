@@ -26,6 +26,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "rest_framework",
+    "drf_spectacular",
     "usuario",
     "FabricaClass",
     'EnvioEmails',
@@ -92,6 +93,15 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+REST_FRAMEWORK = {
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+}
+
+SPECTACULAR_SETTINGS = {
+    "TITLE": "FABRICA CLASS API",
+    "DESCRIPTION": "API para gerenciamento do Fabrica Class, incluindo endpoints e documentação.",
+    "VERSION": "1.0.0",
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
