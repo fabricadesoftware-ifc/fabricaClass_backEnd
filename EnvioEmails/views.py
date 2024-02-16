@@ -1,13 +1,9 @@
 from django.shortcuts import render
-
-# Create your views here.
 from rest_framework.views import APIView
 from rest_framework import status
 from django.core.mail import BadHeaderError, send_mail
 from django.core.exceptions import ValidationError
 from django.http import HttpResponse
-
-
 class EmailAPIView(APIView):
     def post(self, request, *args, **kwargs):
         subject = request.POST.get("subject", "teste")
