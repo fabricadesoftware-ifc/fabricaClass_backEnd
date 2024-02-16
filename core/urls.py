@@ -3,12 +3,12 @@ from django.urls import include, path
 from rest_framework.routers import DefaultRouter
 from FabricaClass.views import TurmaViewSet, CursoViewSet, FormularioViewSet, RespostasViewSet, CriteriosViewSet, PerguntaViewSet
 from usuario.router import router as usuario_router
+from usuario import cadastro, login 
 from drf_spectacular.views import (
     SpectacularAPIView,
     SpectacularRedocView,
     SpectacularSwaggerView,
 )
-from usuario import login
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
@@ -39,5 +39,6 @@ urlpatterns = [
     ),
     path("token/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
     path("token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
-    path('api/signup/', login.create_user, name='create_user'),
+    path('api/cadastro/', cadastro.create_user, name='create_user'),
+    path('api/login/', login.get_user, name='get_user'),
 ]
