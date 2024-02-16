@@ -7,7 +7,7 @@ from rest_framework.decorators import api_view, authentication_classes, permissi
 from django.core.mail import BadHeaderError, send_mail
 from django.core.exceptions import ValidationError
 from django.http import HttpResponse
-from usuario.models import Usuario as User
+from usuario.models import Usuario
 
 def send_email(email, message, subject):
         recipient_list = [email]
@@ -36,8 +36,8 @@ def send_email(email, message, subject):
 def forget_password(request):
     email = request.data.get("email")
     try:
-        user = User.objects.get(email=email)
-    except User.DoesNotExist:
+        user = Usuario.objects.get(email=email)
+    except Usuario.DoesNotExist:
         return Response(
             {"message": "Email não encontrado"}, status=status.HTTP_401_UNAUTHORIZED
         )
@@ -78,8 +78,8 @@ def reset_password(request):
     token = request.data.get("token")
 
     try:
-        user = User.objects.get(password_reset_token=token)  # Alterar para 'id=usuario_id'
-    except User.DoesNotExist:
+        user = Usuario.objects.get(password_reset_token=token)  # Alterar para 'id=usuario_id'
+    except Usuario.DoesNotExist:
         return Response(
             {"message": "Token invalido ou esgotado."}, status=status.HTTP_404_NOT_FOUND
         )
