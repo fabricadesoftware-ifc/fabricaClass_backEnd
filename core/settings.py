@@ -25,7 +25,13 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-     "rest_framework",
+    "rest_framework",
+    "rest_framework_simplejwt",
+    "drf_spectacular",
+    "usuario",
+    "FabricaClass",
+    'EnvioEmails',
+    
 ]
 
 MIDDLEWARE = [
@@ -88,6 +94,21 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+REST_FRAMEWORK = {
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+    ),
+    "DEFAULT_PERMISSION_CLASSES": (
+        "rest_framework.permissions.DjangoModelPermissions",
+    ),
+}
+
+SPECTACULAR_SETTINGS = {
+    "TITLE": "FABRICA CLASS API",
+    "DESCRIPTION": "API para gerenciamento do Fabrica Class, incluindo endpoints e documentação.",
+    "VERSION": "1.0.0",
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
@@ -108,4 +129,15 @@ STATIC_URL = "static/"
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
+
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+
+AUTH_USER_MODEL = "usuario.Usuario" 
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = "suporte.fabricaclass@gmail.com"
+EMAIL_HOST_PASSWORD = "acsz ygvt prep unkw"

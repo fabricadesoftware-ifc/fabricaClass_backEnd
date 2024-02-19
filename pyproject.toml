@@ -7,13 +7,23 @@ authors = [
     {name = "Caussz", email = "cczcaua@gmail.com"},
 ]
 dependencies = [
-    "django>=4.2.4",
+    "django>=4.2.5",
     "djangorestframework>=3.14.0",
+    "setuptools>=68.2.2",
+    "requests>=2.31.0",
+    "drf-spectacular>=0.27.1",
+    "djangorestframework-simplejwt>=5.3.1",
 ]
-requires-python = ">=3.11"
+requires-python = ">=3.10"
 license = {text = "MIT"}
 
 [tool.pdm.dev-dependencies]
 dev = [
     "black>=23.7.0",
+    "djangorestframework>=3.14.0",
 ]
+
+[[tool.pdm.autoexport]]
+filename = "requirements.txt"
+without-hashes = "true"
+
