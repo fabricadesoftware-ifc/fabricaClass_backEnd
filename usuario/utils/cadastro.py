@@ -5,7 +5,7 @@ from django.utils.translation import gettext_lazy as _
 from usuario.models import Usuario
 from rest_framework.response import Response
 from rest_framework import status
-from .models import Usuario
+from ..models import Usuario
 from django.contrib.auth import get_user_model
 User = get_user_model()
 

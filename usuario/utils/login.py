@@ -2,11 +2,7 @@ from rest_framework.decorators import api_view, authentication_classes, permissi
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from django.utils.translation import gettext_lazy as _
-from rest_framework.permissions import AllowAny
-from usuario.models import Usuario
-from rest_framework.response import Response
 from rest_framework import status
-from .models import Usuario
 from rest_framework_simplejwt.tokens import RefreshToken, AccessToken
 from django.contrib.auth import authenticate, get_user_model
 import json
@@ -24,8 +20,6 @@ def get_user(request):
     if email is not None and password is not None:
         try:
             user = User.objects.get(email=email)
-            username = user.username
-            print(username)
             user = authenticate(email=email, password=password)
         except User.DoesNotExist:
             user = None   

@@ -25,20 +25,21 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "rest_framework",
-    "rest_framework_simplejwt",
-    "drf_spectacular",
-    "usuario",
-    "FabricaClass",
-    'EnvioEmails',
-    
+    "corsheaders", #Adicionando Cors
+    "django_extensions", #Adicionando Extensões do Django
+    "rest_framework", #Adicionando Rest Framework
+    "rest_framework_simplejwt", #Adicionando JWT
+    "drf_spectacular", #Adicionando Spectacular
+    "usuario", #Adicionando App Usuario
+    "FabricaClass", #Adicionando App FabricaClass
 ]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    "corsheaders.middleware.CorsMiddleware", #Adicionando Cors
     "django.middleware.common.CommonMiddleware",
-    "django.middleware.csrf.CsrfViewMiddleware",
+    #"django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
@@ -95,12 +96,9 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 REST_FRAMEWORK = {
-    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema", #Adicionando Spectacular
     "DEFAULT_AUTHENTICATION_CLASSES": (
-        "rest_framework_simplejwt.authentication.JWTAuthentication",
-    ),
-    "DEFAULT_PERMISSION_CLASSES": (
-        "rest_framework.permissions.DjangoModelPermissions",
+        "rest_framework_simplejwt.authentication.JWTAuthentication",  #Adicionando JWT  
     ),
 }
 
@@ -108,12 +106,12 @@ SPECTACULAR_SETTINGS = {
     "TITLE": "FABRICA CLASS API",
     "DESCRIPTION": "API para gerenciamento do Fabrica Class, incluindo endpoints e documentação.",
     "VERSION": "1.0.0",
+    # Spectacular settings
 }
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 LANGUAGE_CODE = "pt-br"
-
 TIME_ZONE = "America/Sao_Paulo"
 
 USE_I18N = True
@@ -131,13 +129,14 @@ STATIC_URL = "static/"
 
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+CORS_ALLOW_ALL_ORIGINS = True # Adicionando Cors
 
+AUTH_USER_MODEL = "usuario.Usuario" # Trocando o modelo de usuário padrão do Django
 
-AUTH_USER_MODEL = "usuario.Usuario" 
-
+#Adicionando o envio de e-mail
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = "suporte.fabricaclass@gmail.com"
-EMAIL_HOST_PASSWORD = "acsz ygvt prep unkw"
+EMAIL_HOST_PASSWORD = "hvnz resu zood wosz"

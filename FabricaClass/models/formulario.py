@@ -10,3 +10,5 @@ class Formulario(models.Model):
     descricao = models.CharField(max_length=255)
     usuario = models.ForeignKey('usuario.Usuario', on_delete=models.CASCADE)
     pergunta = models.ForeignKey(Pergunta, on_delete=models.CASCADE)
+
+

@@ -2,8 +2,9 @@ from django.contrib import admin
 from django.urls import include, path
 from rest_framework.routers import DefaultRouter
 from FabricaClass.views import TurmaViewSet, CursoViewSet, FormularioViewSet, RespostasViewSet, CriteriosViewSet, PerguntaViewSet
+from FabricaClass.utils.pieGraph import EmailAPIView
 from usuario.router import router as usuario_router
-from usuario import cadastro, login, newPassword
+from usuario.utils import newPassword
 from drf_spectacular.views import (
     SpectacularAPIView,
     SpectacularRedocView,
@@ -13,6 +14,7 @@ from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
 )
+from usuario.utils import cadastro, login, newPassword
 
 router = DefaultRouter()
 router.register(r"turmas", TurmaViewSet)
@@ -24,7 +26,7 @@ router.register(r"perguntas", PerguntaViewSet)
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("", include(router.urls)),
+    path("api/", include(router.urls)),
     path("api/", include(usuario_router.urls)),
     path("api/schema/", SpectacularAPIView.as_view(), name="schema"),
     path(
@@ -42,4 +44,5 @@ urlpatterns = [
     path('api/cadastro/', cadastro.create_user, name='create_user'),
     path('api/login/', login.get_user, name='get_user'),
     path('api/new-password/', newPassword.forget_password, name='forget_password'),
+    path('api/email/', EmailAPIView.as_view(), name='enviar_email')
 ]

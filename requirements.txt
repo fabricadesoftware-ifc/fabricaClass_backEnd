@@ -5,19 +5,35 @@ asgiref==3.7.2
 attrs==23.2.0
 certifi==2023.7.22
 charset-normalizer==3.3.2
+contourpy==1.2.0
+cycler==0.12.1
 django==4.2.5
+django-cors-headers==4.3.1
+django-extensions==3.2.3
 djangorestframework==3.14.0
+djangorestframework-simplejwt==5.3.1
 drf-spectacular==0.27.1
+fonttools==4.50.0
 idna==3.4
 inflection==0.5.1
 jsonschema==4.21.1
 jsonschema-specifications==2023.12.1
+kiwisolver==1.4.5
+matplotlib==3.8.3
+numpy==1.26.4
+packaging==23.2
+pillow==10.2.0
+pygraphviz==1.12
+pyjwt==2.8.0
+pyparsing==3.1.2
+python-dateutil==2.9.0.post0
 pytz==2023.3.post1
 PyYAML==6.0.1
 referencing==0.33.0
 requests==2.31.0
 rpds-py==0.18.0
 setuptools==68.2.2
+six==1.16.0
 sqlparse==0.4.4
 typing-extensions==4.8.0; python_version < "3.11"
 tzdata==2023.3; sys_platform == "win32"
